@@ -255,7 +255,7 @@
 
 <script>
 const MAX_PER_CAT = 32;
-const OPEN  = new Date('2026-05-25T00:00:00');
+const OPEN  = new Date('2026-05-05T00:00:00');
 const CLOSE = new Date('2026-06-08T23:59:59');
 const EVENT = new Date('2026-06-12T09:00:00');
 const STORAGE_KEY = 'beach_ares_2026_v4';
@@ -404,7 +404,7 @@ document.getElementById('submit-btn').addEventListener('click', function(){
     var c=selectedCats[i];
     if(counts[c]>=MAX_PER_CAT){ alert('La categoría '+(c==='F'?'Femenino':c==='M'?'Masculino':'Mixto')+' ya está completa.'); return; }
   }
- fetch("TU_URL_AQUI", {
+ fetch("https://script.google.com/u/0/home/projects/1leoOtqdGbw5s5NnN3JEHKOmWifHnPWFHZdhP4L0B40oq9Wc2stesVUPI/edit", {
   method: "POST",
   body: JSON.stringify({
     nombre1: n1,
