@@ -293,7 +293,7 @@ let selectedCats = [];
 // --- CATS ---
 document.querySelectorAll('.cat-option').forEach(function(el){
   el.addEventListener('click', function(){
-    const val = el.querySelector('input').value;
+   
     if(selectedCats.includes(val)){
       selectedCats = selectedCats.filter(function(c){ return c !== val; });
       el.classList.remove('selected');
@@ -422,12 +422,27 @@ document.getElementById('submit-btn').addEventListener('click', function(){
 });
 
 function updateCountdown(){
-  var diff = EVENT - new Date();
-  if(diff<=0){ ['cd-dias','cd-horas','cd-min','cd-seg'].forEach(function(id){ document.getElementById(id).textContent='0'; }); return; }
-  document.getElementById('cd-dias').textContent = Math.floor(diff/86400000);
-  document.getElementById('cd-horas').textContent = Math.floor(diff%86400000/3600000);
-  document.getElementById('cd-min').textContent = Math.floor(diff%3600000/60000);
-  document.getElementById('cd-seg').textContent = Math.floor(diff%60000/1000);
+
+  const diff = EVENT - new Date();
+
+  const set = (id, val) => {
+    const el = document.getElementById(id);
+    if(el) el.textContent = val;
+  };
+
+  if(diff <= 0){
+    set('cd-dias', 0);
+    set('cd-horas', 0);
+    set('cd-min', 0);
+    set('cd-seg', 0);
+    return;
+  }
+
+  set('cd-dias', Math.floor(diff / 86400000));
+  set('cd-horas', Math.floor((diff % 86400000) / 3600000));
+  set('cd-min', Math.floor((diff % 3600000) / 60000));
+  set('cd-seg', Math.floor((diff % 60000) / 1000));
+}
 }
 
 renderInscritos();
