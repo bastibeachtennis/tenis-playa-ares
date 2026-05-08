@@ -291,8 +291,35 @@ let selectedCats = [];
 })();
 
 // --- CATS ---
-document.querySelectorAll('.cat-option').forEach(function(el){
-  el.addEventListener('click', function(){
+document.querySelectorAll('.cat-option input').forEach(function(input){
+
+  input.addEventListener('change', function(){
+
+    const val = this.value;
+
+    if(this.checked){
+
+      if(selectedCats.length >= 2){
+        this.checked = false;
+        return;
+      }
+
+      selectedCats.push(val);
+      this.parentElement.classList.add('selected');
+
+    } else {
+
+      selectedCats = selectedCats.filter(function(c){
+        return c !== val;
+      });
+
+      this.parentElement.classList.remove('selected');
+    }
+
+    updateCosteDinamico();
+  });
+
+});
     const val = el.querySelector('input').value;
     if(selectedCats.includes(val)){
       selectedCats = selectedCats.filter(function(c){ return c !== val; });
