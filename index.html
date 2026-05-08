@@ -404,7 +404,17 @@ document.getElementById('submit-btn').addEventListener('click', function(){
     var c=selectedCats[i];
     if(counts[c]>=MAX_PER_CAT){ alert('La categoría '+(c==='F'?'Femenino':c==='M'?'Masculino':'Mixto')+' ya está completa.'); return; }
   }
-  inscritos.push({
+ fetch("TU_URL_AQUI", {
+  method: "POST",
+  body: JSON.stringify({
+    nombre1: n1,
+    nombre2: n2,
+    email: email,
+    telefono: document.getElementById('telefono').value,
+    cats: selectedCats.slice()
+  })
+});
+ inscritos.push({
     nombre1:n1, nombre2:n2, email:email,
     telefono:document.getElementById('telefono').value,
     cats:selectedCats.slice(),
