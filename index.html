@@ -441,8 +441,11 @@ document.getElementById('submit-btn').addEventListener('click', function(){
     var c=selectedCats[i];
     if(counts[c]>=MAX_PER_CAT){ alert('La categoría '+(c==='F'?'Femenino':c==='M'?'Masculino':'Mixto')+' ya está completa.'); return; }
   }
- fetch("https://script.google.com/u/0/home/projects/1leoOtqdGbw5s5NnN3JEHKOmWifHnPWFHZdhP4L0B40oq9Wc2stesVUPI/edit", {
+ fetch("https://script.google.com/macros/s/TU_ID/exec", {
   method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
   body: JSON.stringify({
     nombre1: n1,
     nombre2: n2,
@@ -450,13 +453,14 @@ document.getElementById('submit-btn').addEventListener('click', function(){
     telefono: document.getElementById('telefono').value,
     cats: selectedCats.slice()
   })
+})
+.then(res => res.text())
+.then(data => {
+  console.log("Enviado a Sheets:", data);
+})
+.catch(err => {
+  console.error("Error enviando:", err);
 });
- inscritos.push({
-    nombre1:n1, nombre2:n2, email:email,
-    telefono:document.getElementById('telefono').value,
-    cats:selectedCats.slice(),
-    confirmado:'NO',
-    fecha:new Date().toLocaleDateString('es-ES')
   });
   saveInscritos();
   renderInscritos();
